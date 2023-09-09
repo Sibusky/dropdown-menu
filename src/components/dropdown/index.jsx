@@ -1,16 +1,23 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import './styles.css';
 
-export function DropDown({isOpen, handleTriggerClick, position}) {
-
+export function DropDown({ isOpen, handleTriggerClick, position }) {
+  const menuRef = useRef();
 
   return (
     <div className='dropdown'>
-      <button className='dropdown__trigger' onClick={handleTriggerClick}>
+      <button
+        className='dropdown__trigger'
+        onClick={(event) =>
+          handleTriggerClick(event, menuRef.current.clientHeight, menuRef.current.clientWidth)
+        }
+      >
         trigger
       </button>
+      <div className='test'>test</div>
       <ul
-        className={`dropdown__list${isOpen ? ' dropdown__list_opened' : ''}`}
+        className={`dropdown__menu${isOpen ? ' dropdown__menu_opened' : ''}`}
+        ref={menuRef}
         style={{ top: position.top, left: position.left }}
       >
         <li className='dropdown__item' onClick={() => console.log('li clicked')}>

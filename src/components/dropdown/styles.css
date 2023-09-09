@@ -3,21 +3,25 @@
   border: 1px solid lightblue;
 }
 
-.dropdown__list {
+.dropdown__menu {
   position: absolute;
   top: 0;
   left: 0;
-  display: none;
+  display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
   list-style: none;
   margin: 30px;
   padding: 0;
-  width: 100px;
+  width: 260px;
   border: 1px solid lightpink;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
 }
 
-.dropdown__list_opened {
-  display: flex;
+.dropdown__menu_opened {
+  visibility: visible;
+  opacity: 1;
 }
