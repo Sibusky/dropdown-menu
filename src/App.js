@@ -36,19 +36,19 @@ function App() {
 
     // bottom-right (default) menu offset
     if (menuHeight < deltaY && menuWidth < deltaX) {
-      setPosition({ top: 0, left: 0 });
+      setPosition({ top: triggerHeight, left: triggerWidth });
     }
     // top-right menu offset
     if (menuHeight > deltaY && menuWidth < deltaX) {
-      setPosition({ top: -100, left: 0 });
+      setPosition({ top: -menuHeight, left: triggerWidth });
     }
     // bottom-left menu offset
     if (menuHeight < deltaY && menuWidth > deltaX) {
-      setPosition({ top: 0, left: -200 });
+      setPosition({ top: triggerHeight, left: -menuWidth });
     }
     // top-left menu offset
     if (menuHeight > deltaY && menuWidth > deltaX) {
-      setPosition({ top: -100, left: -200 });
+      setPosition({ top: -menuHeight, left: -menuWidth });
     }
   }
 

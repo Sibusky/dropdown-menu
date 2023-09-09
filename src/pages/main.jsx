@@ -2,7 +2,16 @@ import React from 'react';
 import { DropDown } from '../components/dropdown';
 import { leftDropdown, centerDropdown, rightDropdown } from '../constants/dropdown-items';
 
-export function Main({ isOpen, isClicked, handleTriggerClick, handleClose, changeColor, position, blockRef, mainRef }) {
+export function Main({
+  isOpen,
+  isClicked,
+  handleTriggerClick,
+  handleClose,
+  changeColor,
+  position,
+  blockRef,
+  mainRef,
+}) {
   return (
     <main className='main' ref={mainRef}>
       <section className='block section'>

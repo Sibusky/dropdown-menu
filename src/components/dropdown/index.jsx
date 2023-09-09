@@ -19,7 +19,7 @@ export function DropDown({
   return (
     <div className='dropdown'>
       <button
-        className='dropdown__trigger'
+        className='dropdown__trigger text'
         id={id}
         ref={triggerRef}
         onClick={(event) =>
@@ -32,7 +32,7 @@ export function DropDown({
           )
         }
       >
-        {trigger}
+        {trigger}&nbsp; &nbsp;⫶
       </button>
       <div
         className={`dropdown__overlay${isOpen ? ' dropdown__overlay_opened' : ''}`}
@@ -50,6 +50,7 @@ export function DropDown({
             icon={item.icon}
             color={item.color}
             changeColor={changeColor}
+            handleClose={handleClose}
           />
         ))}
       </ul>
