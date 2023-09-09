@@ -3,12 +3,12 @@ import "./styles.css";
 import { Header } from "../header";
 import Footer from "../footer";
 
-export function Layout({ children }) {
+export function Layout({ children, headerRef, footerRef }) {
   return (
     <div className="layout">
-      <Header />
+      <Header headerRef={headerRef}/>
       {children}
-      <Footer />
+      <Footer footerRef={footerRef}/>
     </div>
   );
 }

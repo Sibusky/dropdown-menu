@@ -1,7 +1,17 @@
 import React, { useRef } from 'react';
 import './styles.css';
+import { DropDownItem } from '../dropdown-item';
 
-export function DropDown({ id, isOpen, handleTriggerClick, handleClose, position }) {
+export function DropDown({
+  id,
+  isOpen,
+  handleTriggerClick,
+  handleClose,
+  position,
+  items,
+  trigger,
+  changeColor,
+}) {
   // use refs to define sizes of elements
   const menuRef = useRef();
   const triggerRef = useRef();
@@ -22,7 +32,7 @@ export function DropDown({ id, isOpen, handleTriggerClick, handleClose, position
           )
         }
       >
-        trigger
+        {trigger}
       </button>
       <div
         className={`dropdown__overlay${isOpen ? ' dropdown__overlay_opened' : ''}`}
@@ -33,21 +43,15 @@ export function DropDown({ id, isOpen, handleTriggerClick, handleClose, position
         ref={menuRef}
         style={{ top: position.top, left: position.left }}
       >
-        <li className='dropdown__item' onClick={() => console.log('li clicked')}>
-          <p className='dropdown__text'>
-            item 1<span className='dropdown__icon'> icon</span>
-          </p>
-        </li>
-        <li className='dropdown__item' onClick={() => console.log('li clicked')}>
-          <p className='dropdown__text'>
-            item 2<span className='dropdown__icon'> icon</span>
-          </p>
-        </li>
-        <li className='dropdown__item' onClick={() => console.log('li clicked')}>
-          <p className='dropdown__text'>
-            item 3<span className='dropdown__icon'> icon</span>
-          </p>
-        </li>
+        {items.map((item) => (
+          <DropDownItem
+            key={item.title}
+            title={item.title}
+            icon={item.icon}
+            color={item.color}
+            changeColor={changeColor}
+          />
+        ))}
       </ul>
     </div>
   );

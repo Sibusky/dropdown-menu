@@ -9,14 +9,17 @@ function App() {
   const [position, setPosition] = useState({ top: 0, left: 0 });
 
   const blockRef = useRef(); // to define sizes of block that contain DropDown
+  const headerRef = useRef();
+  const mainRef = useRef();
+  const footerRef = useRef();
 
   useEffect(() => {
-    const closeByEsc = (event) => {
+    function closeByEsc(event) {
       if (event.key === 'Escape') {
         event.preventDefault();
-        setIsOpen(false);
+        handleClose();
       }
-    };
+    }
     document.addEventListener('keydown', closeByEsc);
     return () => document.removeEventListener('keydown', closeByEsc);
   }, []);
@@ -28,8 +31,8 @@ function App() {
     const deltaY = clientHeight - event.clientY - triggerHeight;
     const deltaX = blockWidth + blockOffsetLeft - event.clientX - triggerWidth;
 
-    setIsOpen(true);
-    setIsClicked(event.target.id);
+    setIsOpen(!isOpen);
+    setIsClicked(event.target.id); // define clicked trigger
 
     // bottom-right (default) menu offset
     if (menuHeight < deltaY && menuWidth < deltaX) {
@@ -53,15 +56,29 @@ function App() {
     setIsOpen(false);
   }
 
+  function changeColor(section, color) {
+    if (section === 'header') {
+      headerRef.current.style.backgroundColor = color;
+    }
+    if (section === 'page') {
+      mainRef.current.style.backgroundColor = color;
+    }
+    if (section === 'footer') {
+      footerRef.current.style.backgroundColor = color;
+    }
+  }
+
   return (
-    <Layout>
+    <Layout headerRef={headerRef} footerRef={footerRef}>
       <Main
         isOpen={isOpen}
         isClicked={isClicked}
         handleTriggerClick={handleTriggerClick}
         handleClose={handleClose}
+        changeColor={changeColor}
         position={position}
         blockRef={blockRef}
+        mainRef={mainRef}
       />
     </Layout>
   );
