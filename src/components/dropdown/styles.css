@@ -1,0 +1,16 @@
+.dropdown {
+  border: 1px solid lightblue;
+}
+
+.dropdown__list {
+  position: absolute;
+  display: none;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  border: 1px solid lightpink;
+}
+
+.dropdown__list_opened {
+  display: flex;
+}
