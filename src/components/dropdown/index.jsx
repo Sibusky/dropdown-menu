@@ -3,13 +3,21 @@ import './styles.css';
 
 export function DropDown({ isOpen, handleTriggerClick, position }) {
   const menuRef = useRef();
+  const triggerRef = useRef();
 
   return (
     <div className='dropdown'>
       <button
         className='dropdown__trigger'
+        ref={triggerRef}
         onClick={(event) =>
-          handleTriggerClick(event, menuRef.current.clientHeight, menuRef.current.clientWidth)
+          handleTriggerClick(
+            event,
+            menuRef.current.clientHeight,
+            menuRef.current.clientWidth,
+            triggerRef.current.clientHeight,
+            triggerRef.current.clientWidth
+          )
         }
       >
         trigger

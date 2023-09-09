@@ -7,14 +7,14 @@ function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [position, setPosition] = useState({ top: 0, left: 0 });
 
-  const blockRef = useRef(); // to define sizes of block with DropDown
+  const blockRef = useRef(); // to define sizes of block that contain DropDown
 
-  function handleTriggerClick(event, menuHeight, menuWidth) {
+  function handleTriggerClick(event, menuHeight, menuWidth, triggerHeight, triggerWidth) {
     const clientHeight = document.documentElement.clientHeight;
-    const blockWidth = blockRef.current.clientWidth
+    const blockWidth = blockRef.current.clientWidth;
     const blockOffsetLeft = blockRef.current.offsetLeft;
-    const deltaY = clientHeight - event.clientY;
-    const deltaX = blockWidth + blockOffsetLeft - event.clientX;
+    const deltaY = clientHeight - event.clientY - triggerHeight;
+    const deltaX = blockWidth + blockOffsetLeft - event.clientX - triggerWidth;
 
     setIsOpen(!isOpen);
 
@@ -35,6 +35,7 @@ function App() {
       setPosition({ top: -100, left: -200 });
     }
 
+    console.log(triggerHeight, triggerWidth);
   }
 
   return (
