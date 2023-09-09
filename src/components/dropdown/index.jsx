@@ -1,7 +1,8 @@
 import React, { useRef } from 'react';
 import './styles.css';
 
-export function DropDown({ isOpen, handleTriggerClick, position }) {
+export function DropDown({ id, isOpen, handleTriggerClick, handleClose, position }) {
+  // use refs to define sizes of elements
   const menuRef = useRef();
   const triggerRef = useRef();
 
@@ -9,6 +10,7 @@ export function DropDown({ isOpen, handleTriggerClick, position }) {
     <div className='dropdown'>
       <button
         className='dropdown__trigger'
+        id={id}
         ref={triggerRef}
         onClick={(event) =>
           handleTriggerClick(
@@ -22,7 +24,10 @@ export function DropDown({ isOpen, handleTriggerClick, position }) {
       >
         trigger
       </button>
-      <div className='test'>test</div>
+      <div
+        className={`dropdown__overlay${isOpen ? ' dropdown__overlay_opened' : ''}`}
+        onClick={handleClose}
+      ></div>
       <ul
         className={`dropdown__menu${isOpen ? ' dropdown__menu_opened' : ''}`}
         ref={menuRef}
