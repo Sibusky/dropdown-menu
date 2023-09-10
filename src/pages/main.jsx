@@ -12,6 +12,8 @@ export function Main({
   blockRef,
   mainRef,
 }) {
+
+
   return (
     <main className='main' ref={mainRef}>
       <section className='block section'>

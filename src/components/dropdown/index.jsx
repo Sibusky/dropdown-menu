@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './styles.css';
 import { DropDownItem } from '../dropdown-item';
 
@@ -12,9 +12,34 @@ export function DropDown({
   trigger,
   changeColor,
 }) {
-  // use refs to define sizes of elements
+  const [isInViewport, setIsInViewport] = useState(false);
+
   const menuRef = useRef();
   const triggerRef = useRef();
+
+  // observer to follow is trigger in viewport or not
+  useEffect(() => {
+    const newRef = triggerRef;
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        console.log('Component is in the viewport');
+        setIsInViewport(true)
+      } else {
+        console.log('Component is not in the viewport');
+        setIsInViewport(false)
+      }
+    });
+
+    if (newRef.current) {
+      observer.observe(newRef.current);
+    }
+
+    return () => {
+      if (newRef.current) {
+        observer.unobserve(newRef.current);
+      }
+    };
+  }, []);
 
   return (
     <div className='dropdown'>
@@ -35,11 +60,11 @@ export function DropDown({
         {trigger}&nbsp; &nbsp;⫶
       </button>
       <div
-        className={`dropdown__overlay${isOpen ? ' dropdown__overlay_opened' : ''}`}
+        className={`dropdown__overlay${isOpen && isInViewport ? ' dropdown__overlay_opened' : ''}`}
         onClick={handleClose}
       ></div>
       <ul
-        className={`dropdown__menu${isOpen ? ' dropdown__menu_opened' : ''}`}
+        className={`dropdown__menu${isOpen && isInViewport ? ' dropdown__menu_opened' : ''}`}
         ref={menuRef}
         style={{ top: position.top, left: position.left }}
       >
