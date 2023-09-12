@@ -17,16 +17,14 @@ export function DropDown({
   const menuRef = useRef();
   const triggerRef = useRef();
 
-  // observer to follow is trigger in viewport or not
+  // observer to define is trigger in viewport or not
   useEffect(() => {
     const newRef = triggerRef;
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
-        console.log('Component is in the viewport');
-        setIsInViewport(true)
+        setIsInViewport(true);
       } else {
-        console.log('Component is not in the viewport');
-        setIsInViewport(false)
+        setIsInViewport(false);
       }
     });
 
